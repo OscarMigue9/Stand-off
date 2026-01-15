@@ -70,7 +70,7 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
     return {
         "H2O": {
             "mol": 1,
-            "Pmol": 0.0077480878361707375,
+            "Pmol": 1.876e+04 / 1e6,
             "variants": [
                 Isotopologue(iso="1", qfile=base + "H2O/q1.txt", Wg=18.010565),
                 Isotopologue(iso="2", qfile=base + "H2O/q2.txt", Wg=20.014811),
@@ -83,7 +83,7 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
         },
         "CO2": {
             "mol": 2,
-            "Pmol": 0.0003299185788304959,
+            "Pmol": 330 / 1e6,
             "variants": [
                 Isotopologue(iso="1", qfile=base + "CO2/q7.txt", Wg=43.989830),
                 Isotopologue(iso="2", qfile=base + "CO2/q8.txt", Wg=44.993185),
@@ -101,7 +101,7 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
         },
         "O3": {
             "mol": 3,
-            "Pmol": 2.6593436960276338e-08,
+            "Pmol": 0.03017 / 1e6,
             "variants": [
                 Isotopologue(iso="1", qfile=base + "O3/q16.txt", Wg=47.984745),
                 Isotopologue(iso="2", qfile=base + "O3/q17.txt", Wg=49.988991),
@@ -112,7 +112,7 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
         },
         "N2O": {
             "mol": 4,
-            "Pmol": 3.1992104613866274e-07,
+            "Pmol": 0.32 / 1e6,
             "variants": [
                 Isotopologue(iso="1", qfile=base + "N2O/q21.txt", Wg=44.001062),
                 Isotopologue(iso="2", qfile=base + "N2O/q22.txt", Wg=44.998096),
@@ -123,7 +123,7 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
         },
         "CO": {
             "mol": 5,
-            "Pmol": 1.4996299037749815e-07,
+            "Pmol": 0.15 / 1e6,
             "variants": [
                 Isotopologue(iso="1", qfile=base + "CO/q26.txt", Wg=27.994915),
                 Isotopologue(iso="2", qfile=base + "CO/q27.txt", Wg=28.998270),
@@ -135,7 +135,7 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
         },
         "CH4": {
             "mol": 6,
-            "Pmol": 1.6995805576116458e-06,
+            "Pmol": 1.7 / 1e6,
             "variants": [
                 Isotopologue(iso="1", qfile=base + "CH4/q32.txt", Wg=16.031300),
                 Isotopologue(iso="2", qfile=base + "CH4/q33.txt", Wg=17.034655),
@@ -152,6 +152,14 @@ def _isotopologue_bank(base: str = "TIPS/") -> Dict[str, Dict[str, Any]]:
                 Isotopologue(iso="3", qfile=base + "O2/q38.txt", Wg=32.994045),
             ],
         },
+        "N2": {
+            "mol": 8,
+            "Pmol": 0.78084,
+            "variants": [
+                Isotopologue(iso="1", qfile=base + "N2/q69.txt", Wg=28.006148),
+                Isotopologue(iso="2", qfile=base + "N2/q118.txt", Wg=29.003182),
+            ],
+        }
     }
 
 # ========================= FUNCTIONS =========================
@@ -360,7 +368,7 @@ def bin_average(x_sorted: np.ndarray, y_sorted: np.ndarray, edges: np.ndarray) -
 def default_species() -> List[Species]:
     """Return the configured `Species` objects; each carries the top isotopologue plus a list of alternatives."""
     bank = _isotopologue_bank()
-    order = ['H2O', 'CO2', 'O3', 'N2O', 'CO', 'CH4', 'O2']
+    order = ['H2O', 'CO2', 'O3', 'N2O', 'CO', 'CH4', 'O2', 'N2']
     species_list: List[Species] = []
     for name in order:
         entry = bank[name]
